@@ -1,0 +1,16 @@
+---
+- name: Install NGINX
+  apt: name=nginx state=present
+
+- name: Copy SSL certificate
+  template: src=comodobundle.crt dest=/etc/ssl/certs/comodobundle.crt
+
+- name: Copy SSL key
+  template: src=dnsimple.key dest=/etc/ssl/private/dnsimple.key
+
+- name: Destroy default site
+  file: dest=/etc/nginx/sites-enabled/default state=absent
+
+- name: Copy default nginx config
+  template: src=web.conf dest=/etc/nginx/sites-enabled/web
+  notify: restart nginx

@@ -1,0 +1,10 @@
+---
+- name: Create a keymaster box for keeping the auth lifecycle going
+  hosts: keymaster.playr.io
+  user: root
+  sudo: yes
+
+  roles:
+    - common
+    - ruby
+    - nginx
